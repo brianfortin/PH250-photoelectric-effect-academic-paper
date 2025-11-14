@@ -1,0 +1,296 @@
+\documentclass[aps,prl,twocolumn,superscriptaddress]{revtex4-2}
+% Packages
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+\begin{document}
+	\title{A Thorough Examination of the Photoelectric Effect and its Consequences on Classical Theory of Light}
+	\author{Brian Fortin}
+	\affiliation{Department of Physics at Colby College, Waterville, Maine}
+	
+	\date{October 26, 2025}
+	
+	\begin{abstract}
+		%Abstract
+		The photoelectric experiment studies the emission of electrons from a cathode when illuminated by light. Released electrons are collected at an anode to complete an electric circuit.
+		According to classical wave theory, there is no threshold frequency, and the energy delivered to each electron is expected to increase with the intensity of the incident light.
+		Experimentally, the retarding potential $V_0$ is independent on intensity of the light, but instead on its frequency $\nu$.
+		This discrepancy highlights a failure of classical theory to describe the energy of light, supporting modern quantum theory.
+		Measurement of $V_0$ versus $\nu$ estimated a value for Planck's constant $h$, with a 22.66\% deviation from the accepted value, at:
+		$h = (5.128105 \pm 0.2826) \times 10^{-34}~\mathrm{J \cdot s}$.
+		
+	\end{abstract}
+	\maketitle
+	%Introduction
+	The idea of light acting as a photon, a \textquotedblleft{packet}\textquotedblright\ of energy from which electrons can receive energy is not a classical idea.
+	Wave theory prevailed as the sole theory of light until 19th-century cathode experiments opened the doorway for new theory of light.
+     Through an investigation of light quantization, our data derived Planck’s constant, challenging the foundations of classical wave theory.
+	
+	%Background
+	Classical theory describes light as acting in a wave-like propagation, similar to that of waves on an ocean. Diffraction experiments, such as Thomas Young's double-slit experiments, confirmed these theories by splitting light of different wavelengths into a series of troughs and peaks~\cite{young1804}.
+	However, contradictions emerged when observations by J.~J.~Thomson in his 1897 cathode ray experiments demonstrated that light can cause metal surfaces to eject electrons in the form of cathode rays~\cite{thomson1897}.
+	Philipp Lenard further explored this phenomenon in 1901--1905 and concluded that the maximum kinetic energy of electrons does not vary with intensity of light, a major contradiction to classical wave theory~\cite{lenard1902}.
+	Further investigations would surely need to occur to better interpret this phenomenon.
+	% ADD HERE
+	
+	Classically, waves are understood to deliver energy to a receiving source \textit{continuously} until enough energy is accumulated to produce an effect. In the cathode ray experiments of the late 19th and early 20th centuries, light was thought to eject an electron only after sufficient energy had been given over a period of time. How could this classical view reconcile with Lenard's experimental findings?
+	Max Planck's 1900 paper on blackbody radiation provided a clue: discrete energy levels calculated accurate predictions for blackbody radiation spectra. His postulate was radical for its time, laying down the foundation for a different understanding of energy. 
+	Planck's quantization postulate replaced the idea of continuous energy exchange with discrete energy quanta.
+	How could the properties of light differ from hundreds of years of experiment? The result was even shocking to Planck himself, who believed that quantization of energy was a \textquotedblleft{mathematical trick}\textquotedblright rather than a physical reality~\cite{planckDiscussion}. To better understand the need for new theory, we replicated Lenard's experiment and the photoelectric effect.
+	
+	%Methods
+	The main apparatus of this experiment is the Leybold Didactic GmbH 558--77 photocell.
+	This electrical circuit is made up of a potassium/silver-oxide cathode and a ring-shaped platinum/rhodium anode within a glass tube.
+	The pressure inside the tube is low, comparable to that of a vacuum.
+	To create a source of light, a mercury spectral bulb is surrounded by black cardboard, except for an opening facing the photocell. 
+	Ultraviolet light shines from a bulb through an aperture, a focal lens, and an interference filter and onto the cathode. 
+	The photocell is on a rail parallel to the bulb, which allows for changeable source-to-apparatus distance to vary intensity.
+	It also has a changeable filter at a known wavelength, which can be changed to vary frequency.
+	After enough electrons have crossed the anode-cathode gap, a sizable photocurrent can be measured. 
+	A Keithley 616 sensitive electrometer is used to measure the photocurrent reaching the anode. The voltage source is an adjustable DC power supply, the Keysight E36104B. Experimentally, it is used to control changes in the strength of the photocurrent.
+	This photocurrent will eventually cross $0~\mathrm{A}$ and reverse direction. 
+	The retarding potential $V_0$ is defined as the magnitude of the potential that reduces the photocurrent to zero.
+	The oridnary least squares method of regression estimated slopes while report standard error is the standard error (SE) of the slope estimate.
+	%Results
+	% d = 60 mm
+	\pgfplotstableread{
+		current        voltage
+		2.8        25.01
+		2.54        20
+		2.43    17.5
+		2.3        15
+		2.1        12.5
+		1.9        10
+		1.613        7.5
+		1.411        6.01
+		1.195        5
+		0.981        4
+		0.528        2.1
+		0.279        1
+		0.1496       0.3
+		0.1034      0.0
+		0.0890        -0.1
+		0.0629        -0.3
+		0.0724        -0.6
+		0.00574        -0.9
+		0.00076        -1.1
+		0.00007        -1.2
+		-0.00052    -1.3
+		
+	}\datatableA
+	% d = 105 mm
+	\pgfplotstableread{
+		current        voltage
+		1.132        25.01
+		1.062        20
+		1.015        17.5
+		0.95        15
+		0.896        12.5
+		0.819        10
+		0.714        7.5
+		0.632        6.01
+		0.551        5
+		0.455        4
+		0.255        2.01
+		0.1304        1
+		0.0455        0.00
+		0.0392        -0.1
+		0.0274        -0.3
+		0.01162        -0.6
+		0.00231        -0.9
+		0.00031        -1.1
+		0.00004        -1.2
+		-0.0002        -1.3
+	}\datatableB
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				name=mainplot,
+				xlabel={Anode potential $(V)$},
+				ylabel={Current ($10^{-7}\ \mathrm{A}$)},
+				%title={Current versus Anode Potential $V$ at $60$ and $105~\mathrm{mm}$},
+				grid=major,
+				width=\linewidth,
+				height=\linewidth,
+				legend pos = south east,
+				% legend style={yshift=10pt},
+				xmin=-2,
+				xmax=26,
+				ymin=-0.5,
+				ymax=3.3,
+				clip=false
+				]
+				
+				\addplot[blue, thick, dashed] table[x=voltage,y=current]{\datatableA};
+				\addlegendentry{$d = 60~\mathrm{mm}$}
+				\addplot[only marks, mark=o, draw=black, mark options={fill=none}, forget plot]
+				table[x=voltage,y=current]{\datatableA};
+				
+				\addplot[red, thick] table[x=voltage,y=current]{\datatableB};
+				\addlegendentry{$d = 105~\mathrm{mm}$}
+				\addplot[only marks, mark=x, draw=black, mark options={fill=none}]
+				table[x=voltage,y=current]{\datatableB};
+				
+			\end{axis}
+			
+			% zoom at intersection
+			\begin{axis}[
+				at={(mainplot.north west)},
+				anchor=north west,
+				xshift=0pt,
+				yshift=0pt,
+				width=0.5\linewidth,
+				height=0.5\linewidth,
+				xmin=-1.4, xmax=0.35,
+				ymin=-0.05, ymax=0.2,
+				grid=major,
+				%title={Zoom at $V_0$},
+				%title style={font=\small},
+				ticklabel style={font=\tiny},
+				axis lines=box
+				]
+				
+				\addplot[blue, thin, dashed] table[x=voltage,y=current]{\datatableA};
+				\addplot[only marks, mark=o, draw=black, mark options={fill=none}, mark size=1.8pt] 
+				table[x=voltage,y=current]{\datatableA};
+				
+				\addplot[red, thin] table[x=voltage,y=current]{\datatableB};
+				\addplot[only marks, mark=x, draw=black, mark options={fill=none}, mark size=1.8pt] 
+				table[x=voltage,y=current]{\datatableB};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Measurements of the photocurrent as a function of anode potential.
+			The results were obtained at two different intensities, using distances of $60$ and $105~\mathrm{mm}$, with light filtered at $435.8~\mathrm{nm}$.
+			The top left graph shows data points around $V_0$, where the photocurrent drops to zero.
+			Though the two lines have different magnitudes of current, they meet at the same $V_0$, which is independent of the intensity.}
+		\label {figure:voltageversuscurrent}
+	\end{figure}
+	
+	To investigate Lenard's findings, we measured photocurrent as a function of anode potential from $25~\mathrm{V}$ to $-1.3~\mathrm{V}$, and the photocurrent with a $435.8~\mathrm{nm}$ filter.
+	This experiment was repeated with the distance from bulb $d$ at $60~\mathrm{mm}$ and $105~\mathrm{mm}$.
+	The retarding potential $V_0$ remained the same at $-1.25~\mathrm{V}$, demonstrating independence from distance (Figure~\ref{figure:voltageversuscurrent}).
+	Varying the anode potential allowed the photocurrent to approach and eventually reach $V_0$, with the photocurrent magnitude decreasing correspondingly (Figure~\ref{figure:one}).
+	Additional measurements of anode potential versus distance confirmed these results, indicating that $V_0$ depends on frequency rather than intensity.
+	% end
+	% GETTING INTO HISTORY AGAIN FOR EXPERIMENT 
+	
+	Continuing from Max Planck's equation for blackbody radiation~\cite{planck1900} and Lenard's findings, Albert Einstein speculated that the properties of light could not be fully explained by wave theory. He proposed the concept of the photon, a discrete quantum of energy~\cite{einstein1905}.
+	This unification of wave and particle theory implies that light propagates through space as a wave but transfers energy instantaneously as individual photons.
+	According to this model, when a photon strikes a metal surface, it transfers its energy to a single electron.
+	This interaction is expressed quantitatively in the following equation, written in terms of the energy of a single photon:
+	\begin{equation}
+		E = h\nu
+		\label{eq:1}
+	\end{equation}
+	where $h$ is Planck's constant and $\nu$ is the frequency of the light.
+	Therefore, the energy of a photon is \textit{quantized}.
+	Einstein’s use of $h$ is intentional, as both Planck and Einstein are describing the same phenomenon: the quantization of light energy.
+	
+	Theoretically, only photons with sufficiently high frequency can eject electrons.
+	Higher frequency equates to higher photon energy and, therefore, greater electron kinetic energy.
+	Following this argument, if photons have discrete energy levels, the results should show that the frequency is what controls the retarding potential $V_0$. 
+	More precisely, $V_0$ is where the photo-induced current through the circuit and across the cathode-anode gap will be equal to zero.
+	Therefore, one should expect:
+	\begin{equation}
+		K_\text{max} = e V_0 = h \nu - \phi
+		\label{eq:kmax}
+	\end{equation}
+	where $e$ is the charge of an electron and $\phi$ is the material-dependent work function.
+	The retarding potential $V_0$ is the voltage required to stop the most energetic emitted electrons from reaching the anode.
+	That is, if the most energetic electrons cannot cross the gap, then none can.
+	The photoelectric effect shows that electromagnetic radiation consists of photons, each carrying energy proportional to its frequency.
+	
+	
+	The relationship can be demonstrated through measuring $V_0$ versus $\nu$, which is exactly what Millikan set out to do in his famous 1914--1916 photoelectric experiments. He found, unexpectedly, that $V_0$ was \textit{not}\ dependent on the intensity of the light as classical theory predicted, but rather on its frequency~\cite{millikan1916}.
+	These results support Einstein's theory and Planck's formulation, demonstrating that light exhibits a wave-particle duality of characteristics.
+	In pursuit of replicating Millikan's results, we conducted the same experiment.
+	
+	To investigate possible variations in $V_0$, we measured the stopping voltage as a function of frequency, $\nu$.
+	The supply voltage was held constant at $20.8~\mathrm{V}$, using a focal lens with $f = 100~\mathrm{mm}$.
+	Different filters with wavelengths of $365$, $404.7$, $435.8$, $546.1$, and $579.1~\mathrm{nm}$ were used to determine $V_0$ for each case.
+	Voltage measurements ranged from $-1.5~\mathrm{V}$ to $-0.8~\mathrm{V}$ to estimate $V_0$. The distances were set at $250~\mathrm{mm}$ from the bulb to the focal lens and an additional $140~\mathrm{mm}$ from the lens to the photocell.
+	% data
+	\pgfplotstableread{
+		frequency        voltage
+		8.21349200e14  1.67
+		7.40228291e14  1.39
+		6.87597381e14  1.275
+		5.49070436e14  0.85
+		5.16883548e14  0.65
+	}\datatable
+	\begin{figure}
+		\begin{tikzpicture}
+			\begin{axis}[
+				xlabel={Frequency $\nu~\mathrm{(Hz)}$},
+				ylabel={Retarding potential $V_0~\mathrm{(V)}$},
+				%title={Determination of $h/e$ from $V_0$ versus $\nu$},
+				grid=major,
+				width=\linewidth,
+				height=\linewidth,
+				legend pos=south east,
+				% legend style = {font=\scriptsize}
+				]
+				
+				% plot data points
+				\addplot [only marks,mark=o,forget plot] table[x=frequency, y=voltage] {\datatable};
+				
+				% linear regression fit
+				\addplot [black,thick] table [y={create col/linear regression={y=voltage}}
+				] {\datatable};
+				\addlegendentry{Linear fit $m = h / e$}
+				
+				% display equation and slope
+				\node [anchor=north west] at (rel axis cs:0.05,0.95)
+				{\small $V_0 = \pgfmathprintnumber{\pgfplotstableregressiona}\,\nu
+					+ \pgfmathprintnumber[print sign]{\pgfplotstableregressionb}$};
+				
+				\node [anchor=north west] at (rel axis cs:0.05,0.88)
+				{\small Slope $(h/e) = \pgfmathprintnumber[sci]{\pgfplotstableregressiona}$};
+				
+			\end{axis}
+		\end{tikzpicture}
+		\caption{
+			Data of the photoelectric effect experiment, confirming a linear relationship between $V_0$ and $\nu$. 
+			From Eq.~\ref{eq:retarding_potential}, the data give a slope of $h/e$, allowing for the estimation of $h$.
+			Planck's constant, with 95\% confidence, was calculated to be $h \in [4.2288, 6.0274]\times10^{-34}\ \mathrm{J \cdot s}$ ($R^2=0.991$), a 22.66\% deviation from the accepted value.
+			Classically, the retarding potential is expected to scale with intensity, not frequency, proving the validity of Einstein's theory of the quantization of light.}
+		\label {figure:one}
+	\end{figure}
+	Millikan found using Eq.~\ref{eq:retarding_potential} that photon energy \textit{was} dependent on $\nu$ and not intensity, and he successfully determined a value for $h$ while varying $\nu$ to measure $V_0$.
+	Our experiment, as shown in Figure~\ref{figure:one}, aimed to replicate his approach.
+	
+	Through manipulation of Eq.~\ref{eq:kmax}, the following equation can be determined:
+	\begin{equation}
+		V_0 = \frac{h}{e} \, \nu - \frac{\phi}{e}
+		\label{eq:retarding_potential}
+	\end{equation}
+	Treating Eq.~\ref{eq:retarding_potential} in slope-intercept form, we plotted the linear relationship $V_0$ versus $\nu$ (Figure~\ref{figure:one}) and estimated $h$ by linear regression:
+	\[
+	h = (5.128105 \pm 0.2826_\mathrm{SE}) \times 10^{-34}\ \mathrm{J \cdot s}
+	\]
+	Using \(t_{0.975,\,df=3}=3.182\) the 95\% confidence interval is:
+	\[
+	h \in [4.2288, 6.0274]\times10^{-34}\ \mathrm{J \cdot s}
+	\]
+	The linear fit has a coefficient of determination of $R^2=0.991$.
+	
+	The result is close to the accepted value of $6.6261\times10^{-34}\ \mathrm{J \cdot s}$, representing an error of approximately 22.66\%, quite an acceptable value given the experimental constraints.
+	An $R^2$ close to $1.0$ indicates that a large portion of the variance is explained by the statistical model, which suggests a strong correlation between $V_0$ and $\nu$.
+	The linear trend shown in Figure~\ref{figure:one}, used for estimating Planck's constant, provides strong support for Eq.~\ref{eq:1}. The possibility of measuring Planck's constant diverges from a classical perspective that would have energy scaling with intensity, not frequency. Therefore, the data support the photon model and validate the linear relationship between $V_0$ and $\nu$ as predicted by Einstein's theory confirming Millikan's findings. 
+	
+	Systematic errors throughout this experiment have a few common origins, the most profound of which include: filter wavelength estimations; surface oxidation on the cathode giving non-constant $\phi$ values; subjective $V_0$ estimation by way of \textquotedblleft{best guesses}\textquotedblright\ between recorded values; the electrometer's instrumental uncertainty of $\pm 0.01$ $V$; and outside light interfering with measurements. Microsoft Excel performed all statistical analysis.
+	
+	%Analysis / Discussion
+	The photoelectric effect provides foundational evidence for modern physical theory. Using Eq.~\ref{eq:1}, Planck's constant can be experimentally determined, directly linking photon energy to light behavior.
+	More broadly, our results confirm the quantized behavior of light incident on electrons.
+	Building on the work done by Planck, Lenard, Einstein, and Millikan this theory-confirming result provides a basis for future research into light and the mechanics of subatomic particles. All four would go on to receive Nobel Prizes for their work relating to the development and verification of the quantization of light~\cite{planckNobel,lenardNobel,einsteinNobel,millikanNobel}.
+	Further research could explore the relationship between light and other subatomic particles, as our paper is limited to ultraviolet light's effect on electrons within a cathode. Empirical evidence can overturn long-standing theoretical assumptions. Though Planck derived the correct answer through mathematics, it was only confirmed through experiment. Physical phenomena cannot be understood by intuition alone; understanding emerges at a crossroads, where empirical observation meets theory.
+	
+	Special thanks to lab partner Henry Riley, and Dr. McCoy from the Department of Physics at Colby College for his guidance and knowledge.
+	\bibliographystyle{apsrev4-2}
+	\bibliography{references}
+\end{document}
